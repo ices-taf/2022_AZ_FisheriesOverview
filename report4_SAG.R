@@ -18,10 +18,10 @@ clean_status <- read.taf("data/clean_status.csv")
 
 #set year and month for captions:
 cap_month = "October"
-cap_year = "2021"
+cap_year = "2022"
 # set year for plot calculations
 
-year = 2021
+year = 2022
 
 
 ###########

@@ -1,6 +1,5 @@
 
 library(icesTAF)
-taf.library(icesFO)
 library(icesFO)
 species_list <- load_asfis_species()
 

@@ -1,7 +1,7 @@
 # Initial formatting of the data
 
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(dplyr)
 
 mkdir("data")
@@ -12,12 +12,12 @@ sid <- read.taf("bootstrap/initial/data/ICES_StockInformation/sid.csv")
 
 # 1: ICES official cath statistics
 
-hist <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_historical_catches.csv")
-official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2018_catches.csv")
-prelim <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
+hist <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_historical_catches.csv")
+official <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_2006_2019_catches.csv")
+prelim <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
 
 catch_dat <- 
-        format_catches(2021, "Azores", 
+        format_catches(2022, "Azores", 
                        hist, official, prelim, species_list, sid)
 
 update <- read.csv("species_classification_azores.csv")
@@ -78,9 +78,11 @@ StockList <- c("thr.27.nea",
                "sck.27.nea")
 
 
-clean_sag <- format_sag(sag_sum, sag_refpts, 2021, "Azores")
-clean_status <- format_sag_status(sag_status, 2021, "Azores")
+# clean_sag <- format_sag(sag_sum, sag_refpts, 2021, "Azores")
+clean_sag <- format_sag(sag_sum, sid)
+
+clean_status <- format_sag_status(sag_status, 2022, "Azores")
 clean_sag<-clean_sag%>%filter(StockKeyLabel %in% StockList)
 clean_status<-clean_status%>%filter(StockKeyLabel %in% StockList)                  
-write.taf(clean_sag, dir = "data")
+write.taf(clean_sag, dir = "data",quote=TRUE)
 write.taf(clean_status, dir = "data", quote = TRUE)

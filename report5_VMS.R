@@ -10,7 +10,7 @@ library(dplyr)
 source("bootstrap/utilities.r")
 
 # set values for automatic naming of files:
-cap_year <- 2021
+cap_year <- 2022
 cap_month <- "October"
 ecoreg_code <- "AZ"
 
@@ -45,6 +45,7 @@ year_range = "2018-2021"
 #~~~~~~~~~~~~~~~#
 
 gears <- c("Static", "Midwater", "Otter", "Demersal seine")
+gears <- c("Static")
 
 effort <-
     effort %>%
@@ -52,10 +53,11 @@ effort <-
       dplyr::mutate(
         fishing_category_FO =
           dplyr::recode(fishing_category_FO,
-            Static = "Static gears",
-            Midwater = "Pelagic trawls and seines",
-            Otter = "Bottom otter trawls",
-            `Demersal seine` = "Bottom seines"),
+            Static = "Static gears"
+            # Midwater = "Pelagic trawls and seines",
+            # Otter = "Bottom otter trawls",
+            # `Demersal seine` = "Bottom seines"
+            ),
           mw_fishinghours = as.numeric(mw_fishinghours)
         ) %>%
       filter(!is.na(mw_fishinghours))
