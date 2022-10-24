@@ -18,7 +18,7 @@ prelim <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_preliminary
 
 catch_dat <- 
         format_catches(2022, "Azores", 
-                       hist, official, prelim, species_list, sid)
+                       hist, official, NULL, species_list, sid)
 
 update <- read.csv("species_classification_azores.csv")
 check <- catch_dat %>% filter(COMMON_NAME %in% update$COMMON_NAME)
